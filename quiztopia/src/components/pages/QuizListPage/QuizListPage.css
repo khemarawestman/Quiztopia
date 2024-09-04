@@ -4,7 +4,7 @@
     padding: 1rem;
     background-color: white;
     border-radius: 0.5rem;
-    box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, 0.1);
+    
 }
 
 h2 {
@@ -23,11 +23,11 @@ h2 {
 .quiz-item {
     background-color: #fff;
     padding: 1.5rem;
-    border-radius: 0.5rem;}
+    border-radius: 0.5rem;
+}
 
 .quiz-item:hover {
     transform: translateY(-0.25rem);
-    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
 }
 
 .quiz-item h3 {
@@ -48,13 +48,13 @@ h2 {
 
 .show-more-button {
     padding: 0.5rem 1.25rem;
-    background-color: #007bff;
+    background-color: #406892;
     color: white;
     border: none;
     border-radius: 0.25rem;
     font-size: 1rem;
     cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.2s ease;
+   
 }
 
 .show-more-button:hover {
@@ -64,7 +64,7 @@ h2 {
 
 .delete-button {
     padding: 0.5rem 1.25rem;
-    background-color: #dc3545;
+    background-color: #790813;
     color: white;
     border: none;
     border-radius: 0.25rem;

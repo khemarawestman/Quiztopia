@@ -1,0 +1,23 @@
+/* components/Navbar.css */
+.navbar {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    gap: 1rem;
+    background-color: transparent; /* No background */
+  }
+  
+  .navbar li {
+    display: inline;
+  }
+  
+  .navbar a {
+    color: black; /* Simple text color */
+    text-decoration: none; /* No underline */
+  }
+  
+  .navbar a:hover {
+    text-decoration: underline; /* Underline on hover to indicate interaction */
+  }
+  

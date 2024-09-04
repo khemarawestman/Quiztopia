@@ -1,0 +1,107 @@
+/* Basic reset to remove default margins/paddings */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Set the font for the entire application */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f9;
+    color: #333;
+}
+
+/* Container for the quiz creation page */
+.container {
+    max-width: 50rem;
+    margin: 2rem auto;
+    padding: 2rem;
+    background-color: white;
+    border-radius: 0.5rem;
+    box-shadow: 0 0.125rem 0.625rem rgba(0, 0, 0, 0.1);
+}
+
+/* Heading styles */
+h2 {
+    font-size: 1.5rem;
+    margin-bottom: 1.25rem;
+    color: #333;
+}
+
+h3 {
+    font-size: 1.25rem;
+    margin-top: 1.25rem;
+    color: #333;
+}
+
+h4 {
+    font-size: 1.125rem;
+    margin-top: 1.25rem;
+    color: #333;
+}
+
+/* Styles for inputs */
+input[type="text"] {
+    width: 100%;
+    padding: 0.625rem;
+    margin: 0.625rem 0;
+    border: 0.0625rem solid #ccc;
+    border-radius: 0.25rem;
+    font-size: 1rem;
+}
+
+/* Button styles */
+button {
+    padding: 0.625rem 1.25rem;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 0.25rem;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+/* Error message styles */
+.error-message {
+    color: red;
+    margin-bottom: 0.625rem;
+}
+
+/* Question list styles */
+ul {
+    list-style-type: none;
+    margin-top: 1.25rem;
+}
+
+ul li {
+    background-color: #f9f9f9;
+    padding: 0.625rem;
+    margin-bottom: 0.625rem;
+    border: 0.0625rem solid #ddd;
+    border-radius: 0.25rem;
+}
+
+/* Map container */
+.map-container {
+    flex-grow: 1;
+    margin-top: 1.25rem;
+    border-radius: 0.5rem;
+    overflow: hidden;
+}
+
+.map-container .leaflet-container {
+    height: 25rem; /* You can adjust the height based on your needs */
+    width: 100%;
+    border-radius: 0.5rem;
+}

@@ -1,11 +1,11 @@
-/* components/Navbar.css */
+
 .navbar {
     list-style: none;
     padding: 0;
     margin: 0;
     display: flex;
     gap: 1rem;
-    background-color: transparent; /* No background */
+    background-color: transparent; 
   }
   
   .navbar li {
@@ -13,11 +13,11 @@
   }
   
   .navbar a {
-    color: black; /* Simple text color */
-    text-decoration: none; /* No underline */
+    color: black; 
+    text-decoration: none; 
   }
   
   .navbar a:hover {
-    text-decoration: underline; /* Underline on hover to indicate interaction */
+    text-decoration: underline;
   }
   

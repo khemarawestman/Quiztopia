@@ -1,17 +1,16 @@
-// App.tsx
 import { Route, Routes } from 'react-router-dom';
 import LoginPage from './components/pages/LoginPage/LoginPage';
 import SignupPage from './components/pages/SignupPage/SignupPage';
 import CreateQuizPage from './components/pages/CreateQuizPage/CreateQuizPage';
 import QuizListPage from './components/pages/QuizListPage/QuizListPage';
 import PrivateRoute from './components/PrivateRoute';
-import Navbar from './components/Navbar/Navbar'; // Import Navbar component
+import Navbar from './components/Navbar/Navbar'; 
 import './App.css';
 
 const App: React.FC = () => {
   return (
     <>
-      <Navbar /> {/* Use Navbar here */}
+      <Navbar />
       <Routes>
         <Route path="/" element={<LoginPage />} />
         <Route path="/register" element={<SignupPage />} />

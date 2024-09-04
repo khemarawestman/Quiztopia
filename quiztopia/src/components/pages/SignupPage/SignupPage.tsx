@@ -31,7 +31,7 @@ const handleSubmit = async (e: FormEvent) => {
 
         if (data.success) {
             alert('Signup successful! Please log in.');
-            navigate('/'); // Redirect to login page after signup
+            navigate('/'); 
         } else {
             alert('Signup was not successful');
         }

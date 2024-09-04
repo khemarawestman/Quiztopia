@@ -5,14 +5,12 @@
     box-sizing: border-box;
 }
 
-/* Set the font for the entire application */
 body {
     font-family: Arial, sans-serif;
     background-color: #f4f4f9;
     color: #333;
 }
 
-/* Container for the quiz creation page */
 .container {
     max-width: 50rem;
     margin: 2rem auto;
@@ -22,7 +20,6 @@ body {
     box-shadow: 0 0.125rem 0.625rem rgba(0, 0, 0, 0.1);
 }
 
-/* Heading styles */
 h2 {
     font-size: 1.5rem;
     margin-bottom: 1.25rem;
@@ -41,7 +38,6 @@ h4 {
     color: #333;
 }
 
-/* Styles for inputs */
 input[type="text"] {
     width: 100%;
     padding: 0.625rem;
@@ -51,7 +47,6 @@ input[type="text"] {
     font-size: 1rem;
 }
 
-/* Button styles */
 button {
     padding: 0.625rem 1.25rem;
     background-color: #007bff;
@@ -72,13 +67,11 @@ button:disabled {
     cursor: not-allowed;
 }
 
-/* Error message styles */
 .error-message {
     color: red;
     margin-bottom: 0.625rem;
 }
 
-/* Question list styles */
 ul {
     list-style-type: none;
     margin-top: 1.25rem;
@@ -92,7 +85,6 @@ ul li {
     border-radius: 0.25rem;
 }
 
-/* Map container */
 .map-container {
     flex-grow: 1;
     margin-top: 1.25rem;
@@ -101,7 +93,7 @@ ul li {
 }
 
 .map-container .leaflet-container {
-    height: 25rem; /* You can adjust the height based on your needs */
+    height: 25rem; 
     width: 100%;
     border-radius: 0.5rem;
 }

@@ -58,7 +58,7 @@ function QuizListPage() {
 
       if (Array.isArray(data.quizzes)) {
         setQuizzes(data.quizzes);
-        console.log('Fetched Quizzes:', data.quizzes); // Log the quizzes array
+        console.log('Fetched Quizzes:', data.quizzes);
       } else {
         console.error('Unexpected data format:', data);
       }
@@ -84,7 +84,7 @@ function QuizListPage() {
   };
 
   const handleDeleteQuiz = async (quizId: string) => {
-    console.log('Deleting quiz with ID:', quizId); // Debugging line
+    console.log('Deleting quiz with ID:', quizId); 
 
     const token = localStorage.getItem('token');
     try {

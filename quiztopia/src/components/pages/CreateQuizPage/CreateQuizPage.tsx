@@ -1,9 +1,8 @@
 import { useState, useEffect } from 'react';
 import { MapContainer, TileLayer, Marker, Popup, useMapEvents } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
-import './CreateQuizPage.css';  
-import L from 'leaflet';  
-
+import './CreateQuizPage.css';
+import L from 'leaflet';
 
 const blueIcon = new L.Icon({
   iconUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png',
@@ -14,7 +13,6 @@ const blueIcon = new L.Icon({
   popupAnchor: [1, -34],
   shadowSize: [41, 41],
 });
-
 
 interface Question {
   question: string;
@@ -30,34 +28,43 @@ function CreateQuizPage() {
   const [questions, setQuestions] = useState<Question[]>([]);  
   const [currentQuestion, setCurrentQuestion] = useState<string>('');  
   const [currentAnswer, setCurrentAnswer] = useState<string>(''); 
-  const [currentLocation, setCurrentLocation] = useState<{ latitude: number; longitude: number }>({ latitude: 57.7046, longitude: 11.9299 });  // Set type for currentLocation
+  const [currentLocation, setCurrentLocation] = useState<{ latitude: string | null; longitude: string | null }>({
+    latitude: null,
+    longitude: null,
+  });  
   const [errorMessage, setErrorMessage] = useState<string | null>(null); 
 
   useEffect(() => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
         (position) => {
-          setCurrentLocation({ latitude: position.coords.latitude, longitude: position.coords.longitude });
+          setCurrentLocation({
+            latitude: position.coords.latitude.toString(), // Store as string
+            longitude: position.coords.longitude.toString(), // Store as string
+          });
           setErrorMessage(null);
         },
         (error) => {
           console.error('Error getting location:', error);
           if (error.code === error.PERMISSION_DENIED) {
-            setErrorMessage('Geolocation permission denied. Defaulting to Eriksberg, Göteborg. You can manually select a location on the map.');
+            setErrorMessage('Geolocation permission denied. Please allow location access to use this feature.');
           } else {
-            setErrorMessage('Error getting location. Defaulting to Eriksberg, Göteborg. Please select a location manually on the map.');
+            setErrorMessage('Error getting location. Please try again.');
           }
         }
       );
     } else {
-      setErrorMessage('Geolocation is not supported by your browser. Defaulting to Eriksberg, Göteborg.');
+      setErrorMessage('Geolocation is not supported by your browser.');
     }
   }, []);
 
   const MapClickHandler = () => {
     useMapEvents({
       click(e) {
-        setCurrentLocation({ latitude: e.latlng.lat, longitude: e.latlng.lng });
+        setCurrentLocation({
+          latitude: `${e.latlng.lat}`, // Keep as string
+          longitude: `${e.latlng.lng}`, // Keep as string
+        });
         setErrorMessage(null); 
       },
     });
@@ -65,13 +72,13 @@ function CreateQuizPage() {
   };
 
   const handleAddQuestion = () => {
-    if (currentQuestion && currentAnswer && currentLocation) {
+    if (currentQuestion && currentAnswer && currentLocation.latitude && currentLocation.longitude) {
       const newQuestion: Question = {
         question: currentQuestion,
         answer: currentAnswer,
         location: {
-          latitude: currentLocation.latitude.toString(),
-          longitude: currentLocation.longitude.toString(), 
+          latitude: currentLocation.latitude, // Already a string
+          longitude: currentLocation.longitude, // Already a string
         },
       };
       setQuestions([...questions, newQuestion]);
@@ -127,14 +134,14 @@ function CreateQuizPage() {
       setQuestions([]);
       setCurrentQuestion('');
       setCurrentAnswer('');
-      setCurrentLocation({ latitude: 57.7046, longitude: 11.9299 }); 
+      setCurrentLocation({ latitude: null, longitude: null });
     } catch (error) {
       if (error instanceof Error) {
         console.error('Error creating quiz:', error.message);
         setErrorMessage(error.message);
       } else {
         console.error('Error creating quiz:', error);
-        setErrorMessage('ops');
+        setErrorMessage('An error occurred while creating the quiz.');
       }
     }
   };
@@ -167,30 +174,34 @@ function CreateQuizPage() {
       />
 
       <div className="map-container">
-        <MapContainer
-          center={[currentLocation.latitude, currentLocation.longitude]}
-          zoom={13}
-        >
-          <TileLayer
-            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-          />
-          <MapClickHandler />
-          {questions.map((q, index) => (
-            <Marker
-              key={index}
-              position={[parseFloat(q.location.latitude), parseFloat(q.location.longitude)]}
-              icon={blueIcon}
-            >
-              <Popup>
-                {q.question} - {q.answer}
-              </Popup>
+        {currentLocation.latitude && currentLocation.longitude ? (
+          <MapContainer
+            center={[parseFloat(currentLocation.latitude), parseFloat(currentLocation.longitude)]}
+            zoom={13}
+          >
+            <TileLayer
+              url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+              attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            />
+            <MapClickHandler />
+            {questions.map((q, index) => (
+              <Marker
+                key={index}
+                position={[parseFloat(q.location.latitude), parseFloat(q.location.longitude)]}
+                icon={blueIcon}
+              >
+                <Popup>
+                  {q.question} - {q.answer}
+                </Popup>
+              </Marker>
+            ))}
+            <Marker position={[parseFloat(currentLocation.latitude), parseFloat(currentLocation.longitude)]} icon={blueIcon}>
+              <Popup>Selected Location</Popup>
             </Marker>
-          ))}
-          <Marker position={[currentLocation.latitude, currentLocation.longitude]} icon={blueIcon}>
-            <Popup>Selected Location</Popup>
-          </Marker>
-        </MapContainer>
+          </MapContainer>
+        ) : (
+          <p>Loading map...</p>
+        )}
       </div>
 
       <button onClick={handleAddQuestion}>Add Question</button>

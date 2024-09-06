@@ -39,8 +39,8 @@ function CreateQuizPage() {
       navigator.geolocation.getCurrentPosition(
         (position) => {
           setCurrentLocation({
-            latitude: position.coords.latitude.toString(), // Store as string
-            longitude: position.coords.longitude.toString(), // Store as string
+            latitude: position.coords.latitude.toString(), 
+            longitude: position.coords.longitude.toString(), 
           });
           setErrorMessage(null);
         },
@@ -62,8 +62,8 @@ function CreateQuizPage() {
     useMapEvents({
       click(e) {
         setCurrentLocation({
-          latitude: `${e.latlng.lat}`, // Keep as string
-          longitude: `${e.latlng.lng}`, // Keep as string
+          latitude: `${e.latlng.lat}`,
+          longitude: `${e.latlng.lng}`, 
         });
         setErrorMessage(null); 
       },
@@ -77,8 +77,8 @@ function CreateQuizPage() {
         question: currentQuestion,
         answer: currentAnswer,
         location: {
-          latitude: currentLocation.latitude, // Already a string
-          longitude: currentLocation.longitude, // Already a string
+          latitude: currentLocation.latitude, 
+          longitude: currentLocation.longitude,
         },
       };
       setQuestions([...questions, newQuestion]);
